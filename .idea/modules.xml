@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RoomLights.iml" filepath="$PROJECT_DIR$/.idea/modules/RoomLights.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RoomLights_main.iml" filepath="$PROJECT_DIR$/.idea/modules/RoomLights_main.iml" group="RoomLights" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RoomLights_test.iml" filepath="$PROJECT_DIR$/.idea/modules/RoomLights_test.iml" group="RoomLights" />
+    </modules>
+  </component>
+</project>

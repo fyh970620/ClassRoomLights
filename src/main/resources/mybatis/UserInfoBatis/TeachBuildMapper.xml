@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fyihan.cn.repository.TeachBuildMapper">
+
+    <resultMap id="teachBuildMapper" type="fyihan.cn.entity.TeachBuild">
+        <id property="teachBuildId" column="TEACH_BUILD_ID"></id>
+        <result property="teachName" column="TEACH_BUILD_NAME"></result>
+        <collection property="tbrs"  ofType="fyihan.cn.entity.TeachBuildRoom">
+            <id property="teachBuildRoomId" column="TEACH_BUILD_ROOM_ID"></id>
+            <result property="teachName" column="TEACH_BUILD_ROOM_NAME"></result>
+            <result property="teachBuildId" column="TEACH_BUILD_ID"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="teachRoomLightsMapper" type="fyihan.cn.entity.TeachRoomLights">
+        <id property="teachRoomLightsId" column="TEACH_ROOM_LIGHTS_ID"></id>
+        <result property="teachRoomLightsName" column="TEACH_ROOM_LIGHTS_NAME"></result>
+        <result property="teachRoomLightsStatus" column="TEACH_ROOM_LIGHTS_STATUS"></result>
+        <result property="teachBuildRoomId" column="TEACH_BUILD_ROOM_ID"></result>
+    </resultMap>
+
+    <!--查出所有的教学楼-->
+    <select id="selectListTeachBuild" resultMap="teachBuildMapper">
+        SELECT * FROM TEACH_BUILD TB
+        LEFT JOIN
+          TEACH_BUILD_ROOM TBR
+        ON
+          TB.TEACH_BUILD_ID = TBR.TEACH_BUILD_ID
+    </select>
+
+    <!--查教室电源-->
+    <select id="selectOSAOfLights" parameterType="java.lang.Integer" resultMap="teachRoomLightsMapper">
+        SELECT * FROM
+          TEACH_ROOM_LIGHTS TRL
+        WHERE
+          TRL.TEACH_BUILD_ROOM_ID =#{teachBuildRoomId}
+    </select>
+
+    <!--更新-->
+    <update id="updateTurnDown" parameterType="java.lang.Integer">
+        UPDATE TEACH_ROOM_LIGHTS trl
+        SET
+        TEACH_ROOM_LIGHTS_STATUS='0'
+        WHERE
+        TEACH_ROOM_LIGHTS_ID=#{teachRoomLightsId}
+    </update>
+    <update id="updateTurnUp" parameterType="java.lang.Integer">
+        UPDATE TEACH_ROOM_LIGHTS trl
+        SET
+          TEACH_ROOM_LIGHTS_STATUS='1'
+        WHERE
+          TEACH_ROOM_LIGHTS_ID=#{teachRoomLightsId}
+    </update>
+
+
+</mapper>

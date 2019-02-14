@@ -1,0 +1,45 @@
+mybatis:
+  config-locations: classpath*:mybatis/mybatis-config.xml
+  type-aliases-package: fyihan.cn.entity
+  mapper-locations: classpath*:mybatis/*/*.xml
+
+spring:
+  datasource:
+      driver-class-name: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@localhost:1521/orcl
+      username: System
+      password: a
+  mail:
+      host: smtp.163.com
+      username: 18073424217@163.com
+      password: fyh977172
+      properties:
+        mail.smtp.auth: true
+        mail.smtp.starttls.enable: true
+        mail.smtp.starttls.required: true
+
+  freemarker:
+    template-loader-path: classpath:/static
+    mvc:
+      static-path-pattern: classpath:/static
+  mvc:
+    favicon:
+      enabled: false
+
+
+##分页配置
+logging:
+     level:
+       com:
+       example:
+       demo:
+       dao: DEBUG
+pagehelper:
+      helperDialect: oracle
+      reasonable: true
+      supportMethodsArguments: true
+      params: count=countSql
+      page-size-zero: true
+
+#SpringBoot发送邮件
+

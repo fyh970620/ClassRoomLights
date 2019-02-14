@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fyihan.cn.repository.ClassUserInfoMapper">
+
+    <resultMap id="ClassUserMap" type="fyihan.cn.entity.ClassUserInfo">
+        <id property="UserInfoId" column="USER_INFO_ID"></id>
+        <result property="Username" column="USER_USERNAME"></result>
+        <result property="UserPassword" column="USER_PASSWORD"></result>
+        <result property="UserEmail" column="USER_EMAIL"></result>
+    </resultMap>
+
+    <!--几个条件查询-->
+    <select id="selectOneUserExist" resultMap="ClassUserMap">
+         SELECT * FROM  CLASS_USER_INFO WHERE USER_USERNAME=#{Username}
+    </select>
+    <select id="selectForgetUser" resultMap="ClassUserMap">
+        SELECT * FROM  CLASS_USER_INFO WHERE USER_USERNAME=#{Username} AND USER_EMAIL=#{UserEmail}
+    </select>
+
+    <!-- 登录 -->
+    <select id="LoginOneUser" resultMap="ClassUserMap">
+          SELECT * FROM  CLASS_USER_INFO WHERE USER_USERNAME=#{Username} AND USER_PASSWORD=#{UserPassword}
+    </select>
+
+    <!--注册-->
+    <insert id="regOneUser">
+         INSERT INTO CLASS_USER_INFO cui
+          (USER_INFO_ID, USER_USERNAME, USER_PASSWORD, USER_EMAIL)
+        VALUEs
+          (CLASS_USER_INFO_SEQ.NEXTVAL, #{cui.Username}, #{cui.UserPassword}, #{cui.UserEmail})
+    </insert>
+
+    <!--修改密码-->
+    <update id="updatePwd">
+        UPDATE CLASS_USER_INFO
+        SET
+          USER_PASSWORD=#{UserPassword}
+        WHERE
+          USER_USERNAME=#{Username}
+    </update>
+
+</mapper>
